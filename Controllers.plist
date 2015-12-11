@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>首页</string>
+		<key>iconName</key>
+		<string>head_normal</string>
+		<key>iconNameSelected</key>
+		<string>head_selected</string>
+		<key>className</key>
+		<string>HeadViewController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>格调</string>
+		<key>iconName</key>
+		<string>subject_normal</string>
+		<key>iconNameSelected</key>
+		<string>subject_selected</string>
+		<key>className</key>
+		<string>SubjectViewController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>精选</string>
+		<key>iconName</key>
+		<string>select_normal</string>
+		<key>iconNameSelected</key>
+		<string>select_selected</string>
+		<key>className</key>
+		<string>SelectionViewController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>分类</string>
+		<key>iconName</key>
+		<string>category_normal</string>
+		<key>iconNameSelected</key>
+		<string>category_selected</string>
+		<key>className</key>
+		<string>CategoryViewController</string>
+	</dict>
+</array>
+</plist>
