@@ -37,7 +37,14 @@
     }];
 }
 
+- (void)testZZUABC {
+    XCTAssertNotNil(nil,@"YES");
+}
+
 - (void)testMyZZU {
     XCTAssertEqual(@1, @2);
 }
+
+
+
 @end
