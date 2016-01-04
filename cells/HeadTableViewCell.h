@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HeaderModel.h"
+//#import "HeaderModel.h"
+#import "WFHeaderModel.h"
 
 @interface HeadTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) HeaderModel *model;
+@property (nonatomic, strong) WFHeaderModel *model;
 
 @end

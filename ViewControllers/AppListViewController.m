@@ -353,50 +353,50 @@
     
     return cell;
 }
-
-#pragma mark -
-#pragma mark scrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    /**
-     *  检测滚动方向
-     */
-    int currentPostion = scrollView.contentOffset.y;
-    
-    if (currentPostion - _lastPosition > 20  && currentPostion > 0) {        //这个地方加上 currentPostion > 0 即可）
-        
-        _lastPosition = currentPostion;
-        
-        //NSLog(@"ScrollUp now");
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight(), screenWidth(), 44);
-        }];
-        
-        if (_daraAry.count == 0) {
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Tip:" message:@"暂无数据，请浏览其他网页" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alertView show];
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-        } else {
-            [self.navigationController setNavigationBarHidden:YES animated:YES];
-        }
-        
-    }
-    
-    else if ((_lastPosition - currentPostion > 20) && (currentPostion  <= scrollView.contentSize.height-scrollView.bounds.size.height - 20)) {
-        _lastPosition = currentPostion;
-        
-        //NSLog(@"ScrollDown now");
-//        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-//        self.tabBarController.tabBar.hidden = NO;
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight() - 44, screenWidth(), 44);
-        }];
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        
-    }
-}
+//
+//#pragma mark -
+//#pragma mark scrollViewDelegate
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    /**
+//     *  检测滚动方向
+//     */
+//    int currentPostion = scrollView.contentOffset.y;
+//    
+//    if (currentPostion - _lastPosition > 20  && currentPostion > 0) {        //这个地方加上 currentPostion > 0 即可）
+//        
+//        _lastPosition = currentPostion;
+//        
+//        //NSLog(@"ScrollUp now");
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight(), screenWidth(), 44);
+//        }];
+//        
+//        if (_daraAry.count == 0) {
+//            
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Tip:" message:@"暂无数据，请浏览其他网页" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//            [alertView show];
+//            [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        } else {
+//            [self.navigationController setNavigationBarHidden:YES animated:YES];
+//        }
+//        
+//    }
+//    
+//    else if ((_lastPosition - currentPostion > 20) && (currentPostion  <= scrollView.contentSize.height-scrollView.bounds.size.height - 20)) {
+//        _lastPosition = currentPostion;
+//        
+//        //NSLog(@"ScrollDown now");
+////        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+////        self.tabBarController.tabBar.hidden = NO;
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight() - 44, screenWidth(), 44);
+//        }];
+//        [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

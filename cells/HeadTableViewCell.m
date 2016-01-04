@@ -9,6 +9,8 @@
 #import "HeadTableViewCell.h"
 #import "UIView+Common.h"
 #import <UIImageView+WebCache.h>
+#import "HeaderModel.h"
+#import "WFHeaderModel.h"
 #define LeftWidth 10
 #define TopHeight 15
 
@@ -77,20 +79,25 @@
 }
 
 - (void)reloadData {
-    [_imgView sd_setImageWithURL:[NSURL URLWithString:_model.jsonContent.img_url] placeholderImage:[UIImage imageNamed:@"ZM_First_Page_Other_Defaut"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//    [_imgView sd_setImageWithURL:[NSURL URLWithString:_model.jsonContent.img_url] placeholderImage:[UIImage imageNamed:@"ZM_First_Page_Other_Defaut"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//    }];
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:_model.case_image_url] placeholderImage:[UIImage imageNamed:@"ZM_First_Page_Other_Defaut"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     
-    _titleLabel.text = _model.jsonContent.title;
+//    _titleLabel.text = _model.jsonContent.title;
+    _titleLabel.text = _model.case_title;
     
-    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:_model.updateTime];
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    df.dateFormat = @"yyyy-MM-dd";
-    _updateLabel.text = [df stringFromDate:date];
+//    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:_model.updateTime];
+//    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//    df.dateFormat = @"yyyy-MM-dd";
+//    _updateLabel.text = [df stringFromDate:date];
+    _updateLabel.text = @"";
     
-    _contentLabel.text = _model.jsonContent.desc;
+//    _contentLabel.text = _model.jsonContent.desc;
+    _contentLabel.text = _model.case_desc;
 }
 
-- (void)setModel:(HeaderModel *)model {
+- (void)setModel:(WFHeaderModel *)model {
     _model = model;
     [self reloadData];
 }

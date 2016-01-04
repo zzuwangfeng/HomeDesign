@@ -97,24 +97,25 @@
     _readCount = readCount;
     [self reloadData];
 }
-
+- (void)setModel:(HeaderDetailModel *)model {
+    _model = model;
+    [self reloadData];
+}
 - (void)reloadData {
-    _titleLabel.text = _caseModel.title;
+    _titleLabel.text = _model.case_title;
     
-    [_imgViewIcon sd_setImageWithURL:[NSURL URLWithString:_userModel.headImg]];
+    [_imgViewIcon sd_setImageWithURL:[NSURL URLWithString:_model.case_image_url]];
     
-    _nameLabel.text = _userModel.nickName;
+    _nameLabel.text = _model.designer_nick_name;
     
-    _readCountLabel.text = [NSString stringWithFormat:@"点击%ld次", (long)_readCount];
+    _readCountLabel.text = [NSString stringWithFormat:@"点击%@次", _model.comment_num];
     
-    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:_caseModel.updateTime];
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    df.dateFormat = @"yyyy-MM-dd";
-    _dateLabel.text = [df stringFromDate:date];
+    
+    _dateLabel.text = _model.date;
     
     NSMutableAttributedString *attributedString;
-    if (_caseModel.desc) {
-        attributedString = [[NSMutableAttributedString alloc] initWithString:_caseModel.desc];
+    if (_model.case_desc) {
+        attributedString = [[NSMutableAttributedString alloc] initWithString:_model.case_desc];
     }
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -123,8 +124,36 @@
     _descLabel.attributedText = attributedString;
     [_descLabel sizeToFit];
     
-//    _descLabel.text = _caseModel.desc;
+    //    _descLabel.text = _caseModel.desc;
 }
+
+//- (void)reloadData {
+//    _titleLabel.text = _caseModel.title;
+//    
+//    [_imgViewIcon sd_setImageWithURL:[NSURL URLWithString:_userModel.headImg]];
+//    
+//    _nameLabel.text = _userModel.nickName;
+//    
+//    _readCountLabel.text = [NSString stringWithFormat:@"点击%ld次", (long)_readCount];
+//    
+//    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:_caseModel.updateTime];
+//    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//    df.dateFormat = @"yyyy-MM-dd";
+//    _dateLabel.text = [df stringFromDate:date];
+//    
+//    NSMutableAttributedString *attributedString;
+//    if (_caseModel.desc) {
+//        attributedString = [[NSMutableAttributedString alloc] initWithString:_caseModel.desc];
+//    }
+//    
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    [paragraphStyle setLineSpacing:3];//调整行间距
+//    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_caseModel.desc length])];
+//    _descLabel.attributedText = attributedString;
+//    [_descLabel sizeToFit];
+//    
+////    _descLabel.text = _caseModel.desc;
+//}
 
 - (void)awakeFromNib {
     // Initialization code

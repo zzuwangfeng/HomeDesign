@@ -20,6 +20,7 @@
 @property (nonatomic, strong) HeaderDetailUserModel *userModel;
 @property (nonatomic, assign) NSInteger readCount;
 
+@property (nonatomic, strong) HeaderDetailModel *model;
 -(void) setCaseModelAndUserModel:(HeaderDetailCaseModel *)caseModel userModel:(HeaderDetailUserModel *)userModel readCount:(NSInteger)readCount;
 
 @end

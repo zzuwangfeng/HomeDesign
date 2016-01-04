@@ -17,7 +17,7 @@
 @implementation HeaderDetailPicsModel
 
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"sortId"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"sortId", @"description": @"desc"}];
 }
 
 @end

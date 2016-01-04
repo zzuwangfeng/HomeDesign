@@ -21,10 +21,11 @@
 @protocol HeaderDetailPicsModel
 @end
 @interface HeaderDetailPicsModel : JSONModel
-@property (nonatomic, assign) NSInteger id;
-@property (nonatomic, assign) NSInteger imageId;
-@property (nonatomic, copy) NSString<Optional> *imgUrl;
-@property (nonatomic, assign) NSInteger sort;
+@property (nonatomic, strong) NSString<Optional> *desc;
+@property (nonatomic, assign) NSInteger image_id;
+@property (nonatomic, assign) NSInteger like;
+@property (nonatomic, strong) NSString<Optional> *title;
+@property (nonatomic, copy) NSString<Optional> *url;
 @end
 
 
@@ -36,8 +37,20 @@
 
 @interface HeaderDetailModel : JSONModel
 @property (nonatomic, strong)HeaderDetailCaseModel<Optional>  *caseItem;
-@property (nonatomic, assign) NSInteger readCount;
-@property (nonatomic, strong) NSArray<HeaderDetailPicsModel, Optional> *pics;
+//@property (nonatomic, assign) NSInteger readCount;
+@property (nonatomic, strong) NSArray<HeaderDetailPicsModel, Optional> *case_pics;
 @property (nonatomic, copy) NSString<Optional> *shareUrl;
-@property (nonatomic, strong) HeaderDetailUserModel<Optional> *user;
+@property (nonatomic, copy) NSString<Optional> *case_desc;
+@property (nonatomic, copy) NSString<Optional> *case_id;
+@property (nonatomic, copy) NSString<Optional> *case_image_url;
+@property (nonatomic, copy) NSString<Optional> *case_title;
+@property (nonatomic, copy) NSString<Optional> *comment_num;
+@property (nonatomic, copy) NSString<Optional> *date;
+@property (nonatomic, copy) NSString<Optional> *designer_id;
+@property (nonatomic, copy) NSString<Optional> *designer_image_url;
+@property (nonatomic, copy) NSString<Optional> *designer_nick_name;
+@property (nonatomic, copy) NSString<Optional> *designer_real_name;
+@property (nonatomic, copy) NSString<Optional> *image_id;
+@property (nonatomic, copy) NSString<Optional> *like;
+//@property (nonatomic, strong) HeaderDetailUserModel<Optional> *user;
 @end

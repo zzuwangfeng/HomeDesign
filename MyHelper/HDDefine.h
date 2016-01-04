@@ -33,9 +33,12 @@ extern NSString * const kLZXBrowses;
 
 
 //首页接口,pageCount 从1开始, pageSize = 10
-#define kHeadUrl @"http://focus_pinge_inf.sohusce.com/v1.1.0/fragment/getOrderListByStatus?type=3&access_token=7f4afb873d52bd1fd4f1c6849a8c0c68&pageNo=%ld"
+#define kHeadUrl @"http://api.pinge.focus.cn/case/list?access_token=&app_id=31022&app_type=iOS&device_token=&os_version=9.2&page=%ld&page_size=10&push_token=wkqxqflslyvunvfc834un64vy8pbkdem&version=2.1.0"
+//@"http://focus_pinge_inf.sohusce.com/v1.1.0/fragment/getOrderListByStatus?type=3&access_token=7f4afb873d52bd1fd4f1c6849a8c0c68&pageNo=%ld"
 // 首页点击接口
-#define kHeadClickUrl @"http://focus_pinge_inf.sohusce.com/v1.1.0/cases/getCaseInfo?access_token=7f4afb873d52bd1fd4f1c6849a8c0c68&caseId=%@"
+#define kHeadClickUrl @"http://api.pinge.focus.cn/case/detail?access_token=&app_id=31022&app_type=iOS&case_id=%@&device_token=&os_version=9.2&push_token=wkqxqflslyvunvfc834un64vy8pbkdem&version=2.1.0"
+
+//@"http://focus_pinge_inf.sohusce.com/v1.1.0/cases/getCaseInfo?access_token=7f4afb873d52bd1fd4f1c6849a8c0c68&caseId=%@"
 // 滚动首部接口
 #define kScrollHeaderUrl @"http://focus_pinge_inf.sohusce.com/v1.1.0/fragment/getOrderListByStatus?type=7&pageSize=4&pageNo=1&access_token=7f4afb873d52bd1fd4f1c6849a8c0c68"
 // 滚动首部点击接口

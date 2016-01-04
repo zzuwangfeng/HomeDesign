@@ -65,16 +65,16 @@
         NSDictionary *dic = [[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
         _model = [[HeaderDetailModel alloc] initWithDictionary:dic error:nil];
         
-        for (int i = 0; i < _model.pics.count; i ++) {
+        for (int i = 0; i < _model.case_pics.count; i ++) {
             [_dicPics setValue:@(200) forKey:[NSString stringWithFormat:@"%d", i]];
         }
         
         
-        for (HeaderDetailPicsModel *pic in _model.pics) {
-            SelectionModel *model = [SelectionModel new];
-            model.case_image_url = pic.imgUrl;
-            [_ary addObject:model];
-        }
+//        for (HeaderDetailPicsModel *pic in _model.pics) {
+//            SelectionModel *model = [SelectionModel new];
+//            model.case_image_url = pic.imgUrl;
+//            [_ary addObject:model];
+//        }
         
         
         [_tableView reloadData];
@@ -157,7 +157,8 @@
     if (indexPath.row == 0) {
         TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCellText" forIndexPath:indexPath];
 
-        [cell setCaseModelAndUserModel:_model.caseItem userModel:_model.user readCount:_model.readCount];
+//        [cell setCaseModelAndUserModel:_model.caseItem userModel:_model.user readCount:_model.readCount];
+        cell.model = _model;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -165,7 +166,7 @@
     } else {
         PicsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell3" forIndexPath:indexPath];
         
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[_model.pics[indexPath.row - 1] imgUrl]] placeholderImage:[UIImage imageNamed:@"ZM_First_Page_Other_Defaut"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[_model.case_pics[indexPath.row - 1] url]] placeholderImage:[UIImage imageNamed:@"ZM_First_Page_Other_Defaut"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
 //            if (!error) {
 //                [_dicPics setValue:@(image.size.height * (screenWidth() - 20) / image.size.width) forKey:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
@@ -188,16 +189,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld", (long)indexPath.row);
-    if (indexPath.row > 0) {
-        
-        ViewControllerScrollView * reuse = [ViewControllerScrollView new];
-        reuse.aryData = _ary;
-        reuse.selIndex = indexPath.row - 1;
-        reuse.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:reuse animated:YES completion:^{
-            
-        }];
-    }
+//    if (indexPath.row > 0) {
+//        
+//        ViewControllerScrollView * reuse = [ViewControllerScrollView new];
+//        reuse.aryData = _ary;
+//        reuse.selIndex = indexPath.row - 1;
+//        reuse.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        [self presentViewController:reuse animated:YES completion:^{
+//            
+//        }];
+//    }
     
     
 }
@@ -230,7 +231,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_model || _dicPics) {
-        return _model.pics.count + 1;//
+        return _model.case_pics.count + 1;//
     }
     return 0;
 }

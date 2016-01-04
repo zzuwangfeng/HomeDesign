@@ -18,6 +18,7 @@
 #import <MMDrawerController.h>
 #import <UIViewController+MMDrawerController.h>
 #import "ContentClickViewController.h"
+#import "WFHeaderModel.h"
 @interface HeadViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
     NSMutableArray *_dataAry;
     NSMutableArray *_picAry;
@@ -94,8 +95,9 @@
     [_tableView registerClass:[HeadTableViewCell class] forCellReuseIdentifier:@"headCell"];
     
     [self.view addSubview:_tableView];
+    [_tableView.header beginRefreshing];
     
-    [self createHeader];
+//    [self createHeader];
 }
 
 - (void)createHeader {
@@ -217,98 +219,104 @@
             return;
         }
     } else {
-        [self loadHeaderDataWithUrl:kScrollHeaderUrl];
+//        [self loadHeaderDataWithUrl:kScrollHeaderUrl];
     }
-    
+    NSLog(@"%@",self.requestUrl);
     NSString *url = [NSString stringWithFormat:self.requestUrl, pageIndex];
     
     [self loadDataWithUrl:url isMore:isMore];
 }
 
-- (void)loadHeaderDataWithUrl:(NSString *)url {
-    NSData *data = [JWCache objectForKey:MD5Hash(url)];
-    
-    if (data && _isCache) {
-        NSArray *ary = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
-        [_picAry removeAllObjects];
-        
-        for (NSDictionary *dic in ary) {
-            HeaderPicModel *model = [[HeaderPicModel alloc] initWithDictionary:dic error:nil];
-            [_picAry addObject:model];
-        }
-        
-        // 刷新表
-        [self initHeader];
-    } else {
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        
-        [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSArray *ary = [[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
-            [_picAry removeAllObjects];
-            for (NSDictionary *dic in ary) {
-                HeaderPicModel *model = [[HeaderPicModel alloc] initWithDictionary:dic error:nil];
-                [_picAry addObject:model];
-                
-            }
-            
-            [self initHeader];
-            // 添加到缓存
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [JWCache setObject:responseObject forKey:MD5Hash(url)];
-            });
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"%@", [error description]);
-        
-        }];
-    }
-}
-
+//- (void)loadHeaderDataWithUrl:(NSString *)url {
+//    NSData *data = [JWCache objectForKey:MD5Hash(url)];
+//    
+//    if (data && _isCache) {
+//        NSArray *ary = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
+//        [_picAry removeAllObjects];
+//        
+//        for (NSDictionary *dic in ary) {
+//            HeaderPicModel *model = [[HeaderPicModel alloc] initWithDictionary:dic error:nil];
+//            [_picAry addObject:model];
+//        }
+//        
+//        // 刷新表
+//        [self initHeader];
+//    } else {
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//        NSLog(@"-----%@",url);
+//        [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSArray *ary = [[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
+//            [_picAry removeAllObjects];
+//            for (NSDictionary *dic in ary) {
+//                HeaderPicModel *model = [[HeaderPicModel alloc] initWithDictionary:dic error:nil];
+//                [_picAry addObject:model];
+//                
+//            }
+//            
+//            [self initHeader];
+//            // 添加到缓存
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                [JWCache setObject:responseObject forKey:MD5Hash(url)];
+//            });
+//            
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            NSLog(@"%@", [error description]);
+//        
+//        }];
+//    }
+//}
+//
 - (void)loadDataWithUrl:(NSString *)url isMore:(BOOL)isMore {
     
     // 添加刷新指示
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
    
-    NSData *data = [JWCache objectForKey:MD5Hash(url)];
-    
-    if (data && _isCache) {
-        NSArray *ary = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
-        if (!isMore) {
-            [_dataAry removeAllObjects];
-        }
-        
-        for (NSDictionary *dic in ary) {
-            HeaderModel *model = [[HeaderModel alloc] initWithDictionary:dic error:nil];
-            [_dataAry addObject:model];
-            
-        }
-        
-        // 刷新表
-        [_tableView reloadData];
-        // 停止刷新指示
-        isMore ? [_tableView.footer endRefreshing] : [_tableView.header endRefreshing];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    } else {
+//    NSData *data = [JWCache objectForKey:MD5Hash(url)];
+//    
+//    if (data && _isCache) {
+//        NSArray *ary = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
+//        if (!isMore) {
+//            [_dataAry removeAllObjects];
+//        }
+//        
+//        for (NSDictionary *dic in ary) {
+//            HeaderModel *model = [[HeaderModel alloc] initWithDictionary:dic error:nil];
+//            [_dataAry addObject:model];
+//            
+//        }
+//        
+//        // 刷新表
+//        [_tableView reloadData];
+//        // 停止刷新指示
+//        isMore ? [_tableView.footer endRefreshing] : [_tableView.header endRefreshing];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    } else {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        
+        NSLog(@"++++++%@",url);
         [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSArray *ary = [[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"];
+            NSArray *ary = [[[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] objectForKey:@"data"] objectForKey:@"data"];
             if (!isMore) {
                 [_dataAry removeAllObjects];
             }
             
+//            for (NSDictionary *dic in ary) {
+//                HeaderModel *model = [[HeaderModel alloc] initWithDictionary:dic error:nil];
+//                [_dataAry addObject:model];
+//                
+//            }
+//
             for (NSDictionary *dic in ary) {
-                HeaderModel *model = [[HeaderModel alloc] initWithDictionary:dic error:nil];
+                WFHeaderModel *model = [[WFHeaderModel alloc] initWithDictionary:dic error:nil];
                 [_dataAry addObject:model];
                 
             }
             
             // 添加到缓存
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [JWCache setObject:responseObject forKey:MD5Hash(url)];
-            });
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                [JWCache setObject:responseObject forKey:MD5Hash(url)];
+//            });
             
             // 刷新表
             [_tableView reloadData];
@@ -320,7 +328,7 @@
             isMore ? [_tableView.footer endRefreshing] : [_tableView.header endRefreshing];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
-    }
+//    }
     
 }
 
@@ -348,11 +356,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    WFHeaderModel *model = _dataAry[indexPath.row];;
     ContentClickViewController *contentViewController = [ContentClickViewController new];
-    contentViewController.caseId = [NSString stringWithFormat:@"%ld", (long)[[_dataAry[indexPath.row] jsonContent] caseId]];
+//    contentViewController.caseId = [NSString stringWithFormat:@"%ld", (long)[[_dataAry[indexPath.row] jsonContent] caseId]];
+    contentViewController.caseId = model.case_id;
     contentViewController.hidesBottomBarWhenPushed = YES;
     
-    contentViewController.title = [[_dataAry[indexPath.row] jsonContent] title];
+//    contentViewController.title = [[_dataAry[indexPath.row] jsonContent] title];
+    contentViewController.title = model.case_title;
     [self.navigationController pushViewController:contentViewController animated:YES];
     
 }
@@ -360,71 +371,71 @@
 
 #pragma mark -
 #pragma mark scrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.tag == 1000) {
-        NSInteger index = scrollView.contentOffset.x / screenWidth() + 0.5;
-        
-        if (scrollView.contentOffset.x <= 0) {
-            [scrollView setContentOffset:CGPointMake((_picAry.count) * screenWidth(), 0) animated:NO];
-        } else if (scrollView.contentOffset.x >= (_picAry.count + 1) * screenWidth()) {
-            [scrollView setContentOffset:CGPointMake(screenWidth(), 0) animated:NO];
-        }
-        if (index > _picAry.count) {
-            _labelHeader1.text = [NSString stringWithFormat:@"%ld", 1l];
-            _headTitleLabel.text = [[_picAry[0] jsonContent] title];
-        } else if (index < 1) {
-            _labelHeader1.text = [NSString stringWithFormat:@"%ld", (unsigned long)_picAry.count];
-            _headTitleLabel.text = [[_picAry[_picAry.count - 3] jsonContent] title];
-        } else {
-            _labelHeader1.text = [NSString stringWithFormat:@"%ld", (long)index];
-            _headTitleLabel.text = [[_picAry[index - 1] jsonContent] title];
-        }
-    }
-    
-    
-    /**
-     *  检测滚动方向
-     */
-    int currentPostion = scrollView.contentOffset.y;
-    
-    if (currentPostion - _lastPosition > 20  && currentPostion > 0) {        //这个地方加上 currentPostion > 0 即可）
-        
-        _lastPosition = currentPostion;
-        
-        //NSLog(@"ScrollUp now");
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight(), screenWidth(), 44);
-            self.navigationController.navigationBar.frame = CGRectMake(0, -44, screenWidth(), 44);
-            _tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        } completion:^(BOOL finished) {
-            
-        }];
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-//        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        
-        
-    }
-    
-    else if ((_lastPosition - currentPostion > 20) && (currentPostion  <= scrollView.contentSize.height-scrollView.bounds.size.height - 20)) {
-        _lastPosition = currentPostion;
-        
-        //NSLog(@"ScrollDown now");
-//        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-//        self.tabBarController.tabBar.hidden = NO;
-        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight() - 44, screenWidth(), 44);
-//            self.navigationController.navigationBar.frame = CGRectMake(0, 20, screenWidth(), 44);
-        } completion:^(BOOL finished) {
-            
-        }];
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        
-    }
-    
-}
-
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView.tag == 1000) {
+//        NSInteger index = scrollView.contentOffset.x / screenWidth() + 0.5;
+//        
+//        if (scrollView.contentOffset.x <= 0) {
+//            [scrollView setContentOffset:CGPointMake((_picAry.count) * screenWidth(), 0) animated:NO];
+//        } else if (scrollView.contentOffset.x >= (_picAry.count + 1) * screenWidth()) {
+//            [scrollView setContentOffset:CGPointMake(screenWidth(), 0) animated:NO];
+//        }
+//        if (index > _picAry.count) {
+//            _labelHeader1.text = [NSString stringWithFormat:@"%ld", 1l];
+//            _headTitleLabel.text = [[_picAry[0] jsonContent] title];
+//        } else if (index < 1) {
+//            _labelHeader1.text = [NSString stringWithFormat:@"%ld", (unsigned long)_picAry.count];
+//            _headTitleLabel.text = [[_picAry[_picAry.count - 3] jsonContent] title];
+//        } else {
+//            _labelHeader1.text = [NSString stringWithFormat:@"%ld", (long)index];
+//            _headTitleLabel.text = [[_picAry[index - 1] jsonContent] title];
+//        }
+//    }
+//    
+//    
+//    /**
+//     *  检测滚动方向
+//     */
+//    int currentPostion = scrollView.contentOffset.y;
+//    
+//    if (currentPostion - _lastPosition > 20  && currentPostion > 0) {        //这个地方加上 currentPostion > 0 即可）
+//        
+//        _lastPosition = currentPostion;
+//        
+//        //NSLog(@"ScrollUp now");
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight(), screenWidth(), 44);
+//            self.navigationController.navigationBar.frame = CGRectMake(0, -44, screenWidth(), 44);
+//            _tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//        [self.navigationController setNavigationBarHidden:YES animated:YES];
+////        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//        
+//        
+//    }
+//    
+//    else if ((_lastPosition - currentPostion > 20) && (currentPostion  <= scrollView.contentSize.height-scrollView.bounds.size.height - 20)) {
+//        _lastPosition = currentPostion;
+//        
+//        //NSLog(@"ScrollDown now");
+////        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+////        self.tabBarController.tabBar.hidden = NO;
+//        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
+//        [UIView animateWithDuration:0.5 animations:^{
+//            self.tabBarController.tabBar.frame = CGRectMake(0, screenHeight() - 44, screenWidth(), 44);
+////            self.navigationController.navigationBar.frame = CGRectMake(0, 20, screenWidth(), 44);
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//        [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        
+//    }
+//    
+//}
+//
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];

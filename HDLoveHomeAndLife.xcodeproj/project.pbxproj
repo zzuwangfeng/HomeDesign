@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AC8B5891C3A712700146ACD /* WFHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8B5881C3A712700146ACD /* WFHeaderModel.m */; };
 		AEE829894233D189FA4A32A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB75F156B61580880DBCEB3 /* libPods.a */; };
 		C515AB0D1BC24FD700FC7448 /* HeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C515AB0C1BC24FD700FC7448 /* HeadTableViewCell.m */; };
 		C515AB111BC2517200FC7448 /* HDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C515AB101BC2517200FC7448 /* HDModel.m */; };
@@ -200,6 +201,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AC8B5871C3A712700146ACD /* WFHeaderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFHeaderModel.h; sourceTree = "<group>"; };
+		0AC8B5881C3A712700146ACD /* WFHeaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFHeaderModel.m; sourceTree = "<group>"; };
 		10E5286561978E5076490688 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3CB3C0167B5AE1DBD74D6E2B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9BB75F156B61580880DBCEB3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -985,6 +988,8 @@
 				C515AB1B1BC2B3D600FC7448 /* HeaderPicModel.m */,
 				C51D2C881BC50C0C00EF2563 /* HeaderDetailModel.h */,
 				C51D2C891BC50C0C00EF2563 /* HeaderDetailModel.m */,
+				0AC8B5871C3A712700146ACD /* WFHeaderModel.h */,
+				0AC8B5881C3A712700146ACD /* WFHeaderModel.m */,
 			);
 			name = "首页Model";
 			sourceTree = "<group>";
@@ -1310,6 +1315,7 @@
 				C58A1A061BC0C72F001C8FF8 /* main.m in Sources */,
 				C5F975781BC10A9500C68A92 /* HDHelper.m in Sources */,
 				C5F9759C1BC148D400C68A92 /* MyControl.m in Sources */,
+				0AC8B5891C3A712700146ACD /* WFHeaderModel.m in Sources */,
 				C58E25AD1BCCE76100E2A81A /* SelCategoryViewController.m in Sources */,
 				C58168671BD0AC2200461946 /* DBManager.m in Sources */,
 			);
