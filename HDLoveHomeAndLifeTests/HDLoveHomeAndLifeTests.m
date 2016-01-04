@@ -37,4 +37,8 @@
     }];
 }
 
+- (void)testMyZZU {
+    XCTAssertEqual(@(1), @(1));
+}
+
 @end
